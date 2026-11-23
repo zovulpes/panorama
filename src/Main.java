@@ -81,9 +81,22 @@ public class Main {
             throw new IllegalArgumentException("Заполните обязательные поля заявки");
         }
 
-        int clientId = nextId(db.get("clients"), "client_id");
-        db.get("clients").add(row("client_id", clientId,
-                "client_name", clientName, "phone", phone, "email", email));
+        // Если клиент уже обращался, используем его существующую запись.
+        int clientId = -1;
+        for (Map<String, Object> client : db.get("clients")) {
+            boolean samePhone = phone.equals(client.get("phone"));
+            boolean sameEmail = email != null && !email.isBlank()
+                    && email.equalsIgnoreCase(String.valueOf(client.get("email")));
+            if (samePhone || sameEmail) {
+                clientId = (Integer) client.get("client_id");
+                break;
+            }
+        }
+        if (clientId == -1) {
+            clientId = nextId(db.get("clients"), "client_id");
+            db.get("clients").add(row("client_id", clientId,
+                    "client_name", clientName, "phone", phone, "email", email));
+        }
 
         int orderId = nextId(db.get("orders"), "order_id");
         Map<String, Object> order = row(

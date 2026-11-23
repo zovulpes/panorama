@@ -1,0 +1,8 @@
+c0d76f9 2026-11-03 20:51:36 +0300 Pastukhova added code, models and updated the report
+cdc9e63 2026-11-02 21:38:13 +0300 Pastukhova updated the report
+1681e8c 2026-11-01 14:17:50 +0300 Pastukhova added models
+91c61f2 2026-10-06 19:21:25 +0300 Pastukhova deleted blank java file, added text in readme and file with link on repo
+db93798 2026-10-05 22:24:55 +0300 Pastukhova addded gitignore
+785fc14 2026-10-05 22:21:25 +0300 Pastukhova updated the report: added translation of the article and the other parts needed for the first stage of pracitce. also added the original article
+fd2560a 2026-10-04 22:32:42 +0300 Pastukhova added report
+c9adb0c 2026-10-04 13:18:53 +0300 Pastukhova first commit
