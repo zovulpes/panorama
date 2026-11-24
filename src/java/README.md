@@ -54,3 +54,22 @@ java panorama.kt3.Main
 
 Специальных тестовых библиотек нет. Для проверки предусмотрен запуск
 демонстрационного сценария командой `java panorama.kt3.Main`.
+
+## Проверки после взаимного рецензирования (КТ3)
+
+Исправлены проверки переходов статусов, повторного планирования, параметров
+стоимости и принадлежности объектов заказу. Расчёт дедлайна вынесен в
+`ProcessingRule.calculateDeadline`. Обновлённая UML-диаграмма находится в
+`models/classes.drawio` и `models/classes.png`.
+
+Для дополнительной проверки из **корня проекта**:
+
+```powershell
+New-Item -ItemType Directory -Force build | Out-Null
+javac -encoding UTF-8 -d build -sourcepath src/java src/java/panorama/kt3/Main.java tests/panorama/kt3/ReviewRegressionTest.java
+java -cp build panorama.kt3.ReviewRegressionTest
+java -cp build panorama.kt3.Main
+```
+
+Ожидаемый результат первого запуска: `Проверки рецензирования пройдены: 13`.
+При выполнении на Java 21 внешний код и библиотеки не требуются.

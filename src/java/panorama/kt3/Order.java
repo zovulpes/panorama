@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class Order {
     private final int orderId;
@@ -23,10 +24,16 @@ public final class Order {
 
     public Order(int orderId, Client client, String location, String purpose,
                  LocalDateTime requestedDate, String videoFormat, int durationMinutes, String requirements) {
-        this.orderId = orderId; this.client = client;
+        if (orderId <= 0 || durationMinutes <= 0
+                || Objects.requireNonNull(location, "location").isBlank()
+                || Objects.requireNonNull(videoFormat, "videoFormat").isBlank()
+                || Objects.requireNonNull(requirements, "requirements").isBlank())
+            throw new IllegalArgumentException("Некорректные параметры заказа");
+        this.orderId = orderId; this.client = Objects.requireNonNull(client, "client");
         this.requestDate = LocalDateTime.now();
         this.shootingLocation = location; this.shootingPurpose = purpose;
-        this.requestedDate = requestedDate; this.videoFormat = videoFormat;
+        this.requestedDate = Objects.requireNonNull(requestedDate, "requestedDate");
+        this.videoFormat = videoFormat;
         this.durationMinutes = durationMinutes; this.requirements = requirements;
     }
     public int getOrderId() { return orderId; }
@@ -49,9 +56,25 @@ public final class Order {
     public List<VideoMaterial> getMaterials() { return Collections.unmodifiableList(materials); }
     public void setEstimate(BigDecimal price, LocalDateTime deadline) { this.estimatedPrice = price; this.deadline = deadline; }
     public void plan(LocalDateTime start, LocalDateTime end) { this.plannedStart = start; this.plannedEnd = end; }
-    public void setStatus(String status) { this.status = status; }
-    public void addAssignment(EmployeeAssignment item) { assignments.add(item); }
-    public void addReservation(EquipmentReservation item) { reservations.add(item); }
-    public void addStage(OrderStage item) { stages.add(item); }
-    public void addMaterial(VideoMaterial item) { materials.add(item); }
+    void setStatus(String status) { this.status = Objects.requireNonNull(status, "status"); }
+    void addAssignment(EmployeeAssignment item) {
+        if (Objects.requireNonNull(item, "item").getOrder() != this)
+            throw new IllegalArgumentException("Назначение относится к другому заказу");
+        assignments.add(item);
+    }
+    void addReservation(EquipmentReservation item) {
+        if (Objects.requireNonNull(item, "item").getOrder() != this)
+            throw new IllegalArgumentException("Бронирование относится к другому заказу");
+        reservations.add(item);
+    }
+    void addStage(OrderStage item) {
+        if (Objects.requireNonNull(item, "item").getOrder() != this)
+            throw new IllegalArgumentException("Этап относится к другому заказу");
+        stages.add(item);
+    }
+    void addMaterial(VideoMaterial item) {
+        if (Objects.requireNonNull(item, "item").getOrder() != this)
+            throw new IllegalArgumentException("Материал относится к другому заказу");
+        materials.add(item);
+    }
 }

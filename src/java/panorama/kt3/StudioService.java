@@ -11,6 +11,24 @@ import java.util.Objects;
 import java.util.Set;
 
 public final class StudioService {
+    private enum ResourceType { EMPLOYEE, EQUIPMENT }
+    private static final Set<String> ALLOWED_STATUSES = Set.of(
+            "новый", "согласован", "запланирован", "съёмка", "обработка",
+            "на проверке", "завершён", "отменён");
+    private static final Map<String, Set<String>> ALLOWED_TRANSITIONS = Map.of(
+            "новый", Set.of("согласован", "запланирован", "отменён"),
+            "согласован", Set.of("запланирован", "отменён"),
+            "запланирован", Set.of("съёмка", "завершён", "отменён"),
+            "съёмка", Set.of("обработка", "отменён"),
+            "обработка", Set.of("на проверке", "отменён"),
+            "на проверке", Set.of("обработка", "завершён", "отменён"),
+            "завершён", Set.of(),
+            "отменён", Set.of());
+    private static ResourceType parseResourceType(String type) {
+        if ("employee".equals(type)) return ResourceType.EMPLOYEE;
+        if ("equipment".equals(type)) return ResourceType.EQUIPMENT;
+        throw new IllegalArgumentException("Неизвестный тип ресурса: " + type);
+    }
     private final Map<Integer, Client> clients = new LinkedHashMap<>();
     private final Map<Integer, Order> orders = new LinkedHashMap<>();
     private final Map<Integer, Employee> employees = new LinkedHashMap<>();
@@ -70,15 +88,15 @@ public final class StudioService {
         stages.add(stage); order.addStage(stage);
         return order;
     }
-    private record Booking(String type, int id, int orderId, LocalDateTime start, LocalDateTime end) { }
+    private record Booking(ResourceType type, int id, int orderId, LocalDateTime start, LocalDateTime end) { }
     private List<Booking> collectBookings() {
         List<Booking> bookings = new ArrayList<>();
         for (EmployeeAssignment a : employeeAssignments) {
-            bookings.add(new Booking("employee", a.getEmployee().getEmployeeId(), a.getOrder().getOrderId(),
+            bookings.add(new Booking(ResourceType.EMPLOYEE, a.getEmployee().getEmployeeId(), a.getOrder().getOrderId(),
                     a.getStartAt(), a.getEndAt()));
         }
         for (EquipmentReservation r : equipmentReservations) {
-            bookings.add(new Booking("equipment", r.getEquipment().getEquipmentId(), r.getOrder().getOrderId(),
+            bookings.add(new Booking(ResourceType.EQUIPMENT, r.getEquipment().getEquipmentId(), r.getOrder().getOrderId(),
                     r.getReservedFrom(), r.getReservedTo()));
         }
         return bookings;
@@ -89,13 +107,11 @@ public final class StudioService {
         List<Booking> bookings = collectBookings();
         // Первый алгоритм КТ2: два вложенных цикла, худший случай O(n*m).
         for (ResourceRequest resource : resources) {
-            String type = resource.resourceType(); int id = resource.resourceId();
-            if (!"employee".equals(type) && !"equipment".equals(type)) {
-                throw new IllegalArgumentException("Неизвестный тип ресурса: " + type);
-            }
+            ResourceType type = parseResourceType(resource.resourceType());
+            int id = resource.resourceId();
             if (id <= 0) throw new IllegalArgumentException("Некорректный идентификатор ресурса");
             for (Booking booking : bookings) {
-                if (!Objects.equals(type, booking.type()) || id != booking.id()
+                if (type != booking.type() || id != booking.id()
                         || currentOrderId == booking.orderId()) continue;
                 if (start.isBefore(booking.end()) && booking.start().isBefore(end)) return false;
             }
@@ -105,6 +121,11 @@ public final class StudioService {
     public Estimate calculateOrderCost(Order order, List<CostItem> employeeCosts,
                                        List<CostItem> equipmentCosts,
                                        BigDecimal ratePerVideoMinute, LocalDateTime shootingEnd) {
+        Objects.requireNonNull(order, "order");
+        Objects.requireNonNull(employeeCosts, "employeeCosts");
+        Objects.requireNonNull(equipmentCosts, "equipmentCosts");
+        if (orders.get(order.getOrderId()) != order)
+            throw new IllegalArgumentException("Заказ не зарегистрирован в данной студии");
         int videoMinutes = order.getDurationMinutes();
         if (videoMinutes <= 0 || shootingEnd == null) throw new IllegalArgumentException("Неверные параметры заказа");
         validateNonNegative(ratePerVideoMinute, "Тариф обработки видео");
@@ -113,16 +134,20 @@ public final class StudioService {
         BigDecimal cost = ratePerVideoMinute.multiply(BigDecimal.valueOf(videoMinutes));
         // Второй алгоритм КТ2: два последовательных цикла, худший случай O(n+m).
         for (CostItem employee : employeeCosts) {
+            if (!employees.containsKey(employee.resourceId()))
+                throw new IllegalArgumentException("Сотрудник не найден: " + employee.resourceId());
             validateNonNegative(employee.hours(), "Время работы сотрудника");
             validateNonNegative(employee.hourlyRate(), "Тариф сотрудника");
             cost = cost.add(employee.hours().multiply(employee.hourlyRate()));
         }
         for (CostItem item : equipmentCosts) {
+            if (!equipment.containsKey(item.resourceId()))
+                throw new IllegalArgumentException("Оборудование не найдено: " + item.resourceId());
             validateNonNegative(item.hours(), "Время использования оборудования");
             validateNonNegative(item.hourlyRate(), "Тариф оборудования");
             cost = cost.add(item.hours().multiply(item.hourlyRate()));
         }
-        LocalDateTime deadline = shootingEnd.plusMinutes(60L + (long) videoMinutes * rule.minutesPerVideoMinute());
+        LocalDateTime deadline = rule.calculateDeadline(shootingEnd, videoMinutes);
         BigDecimal price = cost.setScale(2, RoundingMode.HALF_UP);
         order.setEstimate(price, deadline);
         return new Estimate(price, deadline);
@@ -136,10 +161,11 @@ public final class StudioService {
             throw new IllegalArgumentException("Начало интервала должно быть раньше конца");
     }
     public void updateOrderStatus(int orderId, String status, String stageName, LocalDateTime timestamp) {
-        Set<String> allowed = Set.of("новый", "согласован", "запланирован", "съёмка", "обработка", "на проверке", "завершён", "отменён");
-        if (!allowed.contains(status) || stageName == null || stageName.isBlank() || timestamp == null)
+        if (!ALLOWED_STATUSES.contains(status) || stageName == null || stageName.isBlank() || timestamp == null)
             throw new IllegalArgumentException("Некорректный статус, этап или время");
         Order order = getOrder(orderId);
+        if (!ALLOWED_TRANSITIONS.get(order.getStatus()).contains(status))
+            throw new IllegalStateException("Недопустимый переход: " + order.getStatus() + " -> " + status);
         for (OrderStage stage : stages) {
             if (stage.getOrder().getOrderId() == orderId && stage.getFinishedAt() == null) stage.finish(timestamp);
         }
@@ -158,6 +184,11 @@ public final class StudioService {
                           LocalDateTime start, LocalDateTime end) {
         Order order = getOrder(orderId);
         validateInterval(start, end);
+        Objects.requireNonNull(employeeIds, "employeeIds");
+        Objects.requireNonNull(equipmentIds, "equipmentIds");
+        if (!Set.of("новый", "согласован").contains(order.getStatus())
+                || !order.getAssignments().isEmpty() || !order.getReservations().isEmpty())
+            throw new IllegalStateException("Заказ уже запланирован либо его статус не допускает планирование");
         if (employeeIds.isEmpty() || equipmentIds.isEmpty()
                 || Set.copyOf(employeeIds).size() != employeeIds.size()
                 || Set.copyOf(equipmentIds).size() != equipmentIds.size()) {

@@ -30,13 +30,13 @@
           <mxGeometry x="0" y="310" width="610" height="1" as="geometry"/>
         </mxCell>
         <mxCell id="class_ProcessingRule" value="«interface»&lt;br&gt;ProcessingRule" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1760" y="75" width="550" height="172" as="geometry"/>
+          <mxGeometry x="1760" y="75" width="550" height="200" as="geometry"/>
         </mxCell>
         <mxCell id="class_ProcessingRule_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ProcessingRule">
           <mxGeometry x="0" y="58" width="550" height="44" as="geometry"/>
         </mxCell>
-        <mxCell id="class_ProcessingRule_methods" value="+ getFormat(): String&lt;br&gt;+ minutesPerVideoMinute(): int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ProcessingRule">
-          <mxGeometry x="0" y="102" width="550" height="70" as="geometry"/>
+        <mxCell id="class_ProcessingRule_methods" value="+ getFormat(): String&lt;br&gt;+ minutesPerVideoMinute(): int&lt;br&gt;+ calculateDeadline(LocalDateTime, int): LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ProcessingRule">
+          <mxGeometry x="0" y="102" width="550" height="98" as="geometry"/>
         </mxCell>
         <mxCell id="class_ProcessingRule_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_ProcessingRule">
           <mxGeometry x="0" y="102" width="550" height="1" as="geometry"/>
@@ -83,7 +83,7 @@
         <mxCell id="class_Order_attributes" value="- orderId: int&lt;br&gt;- client: Client&lt;br&gt;- requestDate: LocalDateTime&lt;br&gt;- shootingLocation: String&lt;br&gt;- shootingPurpose: String&lt;br&gt;- requestedDate: LocalDateTime&lt;br&gt;- videoFormat: String&lt;br&gt;- durationMinutes: int&lt;br&gt;- requirements: String&lt;br&gt;- plannedStart: LocalDateTime&lt;br&gt;- plannedEnd: LocalDateTime&lt;br&gt;- deadline: LocalDateTime&lt;br&gt;- estimatedPrice: BigDecimal&lt;br&gt;- status: String&lt;br&gt;- assignments: List&amp;lt;EmployeeAssignment&amp;gt;&lt;br&gt;- reservations: List&amp;lt;EquipmentReservation&amp;gt;&lt;br&gt;- stages: List&amp;lt;OrderStage&amp;gt;&lt;br&gt;- materials: List&amp;lt;VideoMaterial&amp;gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Order">
           <mxGeometry x="0" y="58" width="650" height="486" as="geometry"/>
         </mxCell>
-        <mxCell id="class_Order_methods" value="+ getOrderId(): int&lt;br&gt;+ getClient(): Client&lt;br&gt;+ getStatus(): String&lt;br&gt;+ getDurationMinutes(): int&lt;br&gt;+ getVideoFormat(): String&lt;br&gt;+ setEstimate(BigDecimal, LocalDateTime): void&lt;br&gt;+ plan(LocalDateTime, LocalDateTime): void&lt;br&gt;+ setStatus(String): void&lt;br&gt;+ addAssignment(EmployeeAssignment): void&lt;br&gt;+ addReservation(EquipmentReservation): void&lt;br&gt;+ addStage(OrderStage): void&lt;br&gt;+ addMaterial(VideoMaterial): void" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Order">
+        <mxCell id="class_Order_methods" value="+ getOrderId(): int&lt;br&gt;+ getClient(): Client&lt;br&gt;+ getStatus(): String&lt;br&gt;+ getDurationMinutes(): int&lt;br&gt;+ getVideoFormat(): String&lt;br&gt;+ setEstimate(BigDecimal, LocalDateTime): void&lt;br&gt;+ plan(LocalDateTime, LocalDateTime): void&lt;br&gt;~ setStatus(String): void&lt;br&gt;~ addAssignment(EmployeeAssignment): void&lt;br&gt;~ addReservation(EquipmentReservation): void&lt;br&gt;~ addStage(OrderStage): void&lt;br&gt;~ addMaterial(VideoMaterial): void" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Order">
           <mxGeometry x="0" y="544" width="650" height="330" as="geometry"/>
         </mxCell>
         <mxCell id="class_Order_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Order">
