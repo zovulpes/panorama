@@ -62,7 +62,7 @@ java panorama.kt3.Main
 `ProcessingRule.calculateDeadline`. Обновлённая UML-диаграмма находится в
 `models/classes.drawio` и `models/classes.png`.
 
-Для дополнительной проверки из **корня проекта**:
+Для дополнительной проверки из **корня проекта** (папка `tests/` включена в итоговый ZIP КТ3 и также находится в GitHub-репозитории):
 
 ```powershell
 New-Item -ItemType Directory -Force build | Out-Null
