@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="app.diagrams.net" modified="2026-11-24T20:00:00.000Z" agent="OpenAI" version="24.7.17" type="device">
+  <diagram id="umlkt3" name="Диаграмма классов">
+    <mxGraphModel dx="1920" dy="1080" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4460" pageHeight="3060" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="class_Main" value="«application»&lt;br&gt;Main" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="75" width="560" height="146" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Main_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Main">
+          <mxGeometry x="0" y="58" width="560" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Main_methods" value="+ main(String[]): void" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Main">
+          <mxGeometry x="0" y="102" width="560" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Main_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Main">
+          <mxGeometry x="0" y="102" width="560" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_StudioService" value="StudioService" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="710" y="75" width="610" height="744" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_StudioService_attributes" value="- clients: Map&amp;lt;Integer, Client&amp;gt;&lt;br&gt;- orders: Map&amp;lt;Integer, Order&amp;gt;&lt;br&gt;- employees: Map&amp;lt;Integer, Employee&amp;gt;&lt;br&gt;- equipment: Map&amp;lt;Integer, Equipment&amp;gt;&lt;br&gt;- employeeAssignments: List&amp;lt;EmployeeAssignment&amp;gt;&lt;br&gt;- equipmentReservations: List&amp;lt;EquipmentReservation&amp;gt;&lt;br&gt;- stages: List&amp;lt;OrderStage&amp;gt;&lt;br&gt;- videoMaterials: List&amp;lt;VideoMaterial&amp;gt;&lt;br&gt;- processingRules: Map&amp;lt;String, ProcessingRule&amp;gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_StudioService">
+          <mxGeometry x="0" y="58" width="610" height="252" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_StudioService_methods" value="+ addOperator(String, String): CameraOperator&lt;br&gt;+ addVideoEditor(String, String): VideoEditor&lt;br&gt;+ addEquipment(String, String, String, String): Equipment&lt;br&gt;+ registerRequest(...): Order&lt;br&gt;+ checkResourceAvailability(List&amp;lt;ResourceRequest&amp;gt;, int, LocalDateTime, LocalDateTime): boolean&lt;br&gt;+ calculateOrderCost(Order, List&amp;lt;CostItem&amp;gt;, List&amp;lt;CostItem&amp;gt;, BigDecimal, LocalDateTime): Estimate&lt;br&gt;+ updateOrderStatus(int, String, String, LocalDateTime): void&lt;br&gt;+ planOrder(int, List&amp;lt;Integer&amp;gt;, List&amp;lt;Integer&amp;gt;, LocalDateTime, LocalDateTime): void&lt;br&gt;+ addVideoMaterial(int, String, String, LocalDateTime, String): void&lt;br&gt;+ getOrder(int): Order&lt;br&gt;+ addProcessingRule(ProcessingRule): void&lt;br&gt;+ getClientCount(): int&lt;br&gt;+ getOrderCount(): int&lt;br&gt;+ getAssignmentCount(): int&lt;br&gt;+ getReservationCount(): int&lt;br&gt;+ countVideoMaterials(int): long" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_StudioService">
+          <mxGeometry x="0" y="310" width="610" height="434" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_StudioService_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_StudioService">
+          <mxGeometry x="0" y="310" width="610" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ProcessingRule" value="«interface»&lt;br&gt;ProcessingRule" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="75" width="550" height="172" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ProcessingRule_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ProcessingRule">
+          <mxGeometry x="0" y="58" width="550" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ProcessingRule_methods" value="+ getFormat(): String&lt;br&gt;+ minutesPerVideoMinute(): int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ProcessingRule">
+          <mxGeometry x="0" y="102" width="550" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ProcessingRule_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_ProcessingRule">
+          <mxGeometry x="0" y="102" width="550" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_FourKProcessingRule" value="«implements ProcessingRule»&lt;br&gt;FourKProcessingRule" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2480" y="75" width="590" height="172" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_FourKProcessingRule_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_FourKProcessingRule">
+          <mxGeometry x="0" y="58" width="590" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_FourKProcessingRule_methods" value="+ getFormat(): String&lt;br&gt;+ minutesPerVideoMinute(): int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_FourKProcessingRule">
+          <mxGeometry x="0" y="102" width="590" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_FourKProcessingRule_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_FourKProcessingRule">
+          <mxGeometry x="0" y="102" width="590" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_HighResolutionProcessingRule" value="«implements ProcessingRule»&lt;br&gt;HighResolutionProcessingRule" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="3290" y="75" width="625" height="172" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_HighResolutionProcessingRule_attributes" value="- format: String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_HighResolutionProcessingRule">
+          <mxGeometry x="0" y="58" width="625" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_HighResolutionProcessingRule_methods" value="+ getFormat(): String&lt;br&gt;+ minutesPerVideoMinute(): int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_HighResolutionProcessingRule">
+          <mxGeometry x="0" y="102" width="625" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_HighResolutionProcessingRule_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_HighResolutionProcessingRule">
+          <mxGeometry x="0" y="102" width="625" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Client" value="Client" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="980" width="570" height="328" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Client_attributes" value="- clientId: int&lt;br&gt;- clientName: String&lt;br&gt;- phone: String&lt;br&gt;- email: String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Client">
+          <mxGeometry x="0" y="58" width="570" height="122" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Client_methods" value="+ getClientId(): int&lt;br&gt;+ getClientName(): String&lt;br&gt;+ getPhone(): String&lt;br&gt;+ getEmail(): String&lt;br&gt;+ matches(String, String): boolean" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Client">
+          <mxGeometry x="0" y="180" width="570" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Client_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Client">
+          <mxGeometry x="0" y="180" width="570" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Order" value="Order" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="710" y="1020" width="650" height="874" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Order_attributes" value="- orderId: int&lt;br&gt;- client: Client&lt;br&gt;- requestDate: LocalDateTime&lt;br&gt;- shootingLocation: String&lt;br&gt;- shootingPurpose: String&lt;br&gt;- requestedDate: LocalDateTime&lt;br&gt;- videoFormat: String&lt;br&gt;- durationMinutes: int&lt;br&gt;- requirements: String&lt;br&gt;- plannedStart: LocalDateTime&lt;br&gt;- plannedEnd: LocalDateTime&lt;br&gt;- deadline: LocalDateTime&lt;br&gt;- estimatedPrice: BigDecimal&lt;br&gt;- status: String&lt;br&gt;- assignments: List&amp;lt;EmployeeAssignment&amp;gt;&lt;br&gt;- reservations: List&amp;lt;EquipmentReservation&amp;gt;&lt;br&gt;- stages: List&amp;lt;OrderStage&amp;gt;&lt;br&gt;- materials: List&amp;lt;VideoMaterial&amp;gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Order">
+          <mxGeometry x="0" y="58" width="650" height="486" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Order_methods" value="+ getOrderId(): int&lt;br&gt;+ getClient(): Client&lt;br&gt;+ getStatus(): String&lt;br&gt;+ getDurationMinutes(): int&lt;br&gt;+ getVideoFormat(): String&lt;br&gt;+ setEstimate(BigDecimal, LocalDateTime): void&lt;br&gt;+ plan(LocalDateTime, LocalDateTime): void&lt;br&gt;+ setStatus(String): void&lt;br&gt;+ addAssignment(EmployeeAssignment): void&lt;br&gt;+ addReservation(EquipmentReservation): void&lt;br&gt;+ addStage(OrderStage): void&lt;br&gt;+ addMaterial(VideoMaterial): void" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Order">
+          <mxGeometry x="0" y="544" width="650" height="330" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Order_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Order">
+          <mxGeometry x="0" y="544" width="650" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Employee" value="«abstract»&lt;br&gt;Employee" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="980" width="610" height="328" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Employee_attributes" value="- employeeId: int&lt;br&gt;- fullName: String&lt;br&gt;- role: String&lt;br&gt;- phone: String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Employee">
+          <mxGeometry x="0" y="58" width="610" height="122" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Employee_methods" value="+ getEmployeeId(): int&lt;br&gt;+ getFullName(): String&lt;br&gt;+ getRole(): String&lt;br&gt;+ getPhone(): String&lt;br&gt;+ describeWork(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Employee">
+          <mxGeometry x="0" y="180" width="610" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Employee_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Employee">
+          <mxGeometry x="0" y="180" width="610" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CameraOperator" value="«extends Employee»&lt;br&gt;CameraOperator" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2290" y="980" width="560" height="146" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CameraOperator_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_CameraOperator">
+          <mxGeometry x="0" y="58" width="560" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CameraOperator_methods" value="+ describeWork(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_CameraOperator">
+          <mxGeometry x="0" y="102" width="560" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CameraOperator_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_CameraOperator">
+          <mxGeometry x="0" y="102" width="560" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoEditor" value="«extends Employee»&lt;br&gt;VideoEditor" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2990" y="980" width="570" height="146" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoEditor_attributes" value="&amp;nbsp;" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_VideoEditor">
+          <mxGeometry x="0" y="58" width="570" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoEditor_methods" value="+ describeWork(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_VideoEditor">
+          <mxGeometry x="0" y="102" width="570" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoEditor_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_VideoEditor">
+          <mxGeometry x="0" y="102" width="570" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Equipment" value="Equipment" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="3700" y="980" width="590" height="354" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Equipment_attributes" value="- equipmentId: int&lt;br&gt;- equipmentName: String&lt;br&gt;- equipmentType: String&lt;br&gt;- inventoryNumber: String&lt;br&gt;- condition: String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Equipment">
+          <mxGeometry x="0" y="58" width="590" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Equipment_methods" value="+ getEquipmentId(): int&lt;br&gt;+ getEquipmentName(): String&lt;br&gt;+ getEquipmentType(): String&lt;br&gt;+ getInventoryNumber(): String&lt;br&gt;+ getCondition(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Equipment">
+          <mxGeometry x="0" y="206" width="590" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Equipment_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Equipment">
+          <mxGeometry x="0" y="206" width="590" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_OrderStage" value="OrderStage" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="2080" width="570" height="354" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_OrderStage_attributes" value="- stageId: int&lt;br&gt;- order: Order&lt;br&gt;- stageName: String&lt;br&gt;- status: String&lt;br&gt;- startedAt: LocalDateTime&lt;br&gt;- finishedAt: LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_OrderStage">
+          <mxGeometry x="0" y="58" width="570" height="174" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_OrderStage_methods" value="+ getStageId(): int&lt;br&gt;+ getOrder(): Order&lt;br&gt;+ getStatus(): String&lt;br&gt;+ finish(LocalDateTime): void" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_OrderStage">
+          <mxGeometry x="0" y="232" width="570" height="122" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_OrderStage_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_OrderStage">
+          <mxGeometry x="0" y="232" width="570" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoMaterial" value="VideoMaterial" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="720" y="2080" width="590" height="354" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoMaterial_attributes" value="- materialId: int&lt;br&gt;- order: Order&lt;br&gt;- materialType: String&lt;br&gt;- storagePath: String&lt;br&gt;- createdAt: LocalDateTime&lt;br&gt;- qualityStatus: String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_VideoMaterial">
+          <mxGeometry x="0" y="58" width="590" height="174" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoMaterial_methods" value="+ getMaterialId(): int&lt;br&gt;+ getOrder(): Order&lt;br&gt;+ getMaterialType(): String&lt;br&gt;+ getStoragePath(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_VideoMaterial">
+          <mxGeometry x="0" y="232" width="590" height="122" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_VideoMaterial_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_VideoMaterial">
+          <mxGeometry x="0" y="232" width="590" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EmployeeAssignment" value="EmployeeAssignment" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="2080" width="625" height="354" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EmployeeAssignment_attributes" value="- assignmentId: int&lt;br&gt;- order: Order&lt;br&gt;- employee: Employee&lt;br&gt;- taskRole: String&lt;br&gt;- startAt: LocalDateTime&lt;br&gt;- endAt: LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_EmployeeAssignment">
+          <mxGeometry x="0" y="58" width="625" height="174" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EmployeeAssignment_methods" value="+ getAssignmentId(): int&lt;br&gt;+ getOrder(): Order&lt;br&gt;+ getEmployee(): Employee&lt;br&gt;+ getTaskRole(): String" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_EmployeeAssignment">
+          <mxGeometry x="0" y="232" width="625" height="122" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EmployeeAssignment_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_EmployeeAssignment">
+          <mxGeometry x="0" y="232" width="625" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EquipmentReservation" value="EquipmentReservation" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="2240" y="2080" width="665" height="302" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EquipmentReservation_attributes" value="- reservationId: int&lt;br&gt;- order: Order&lt;br&gt;- equipment: Equipment&lt;br&gt;- reservedFrom: LocalDateTime&lt;br&gt;- reservedTo: LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_EquipmentReservation">
+          <mxGeometry x="0" y="58" width="665" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EquipmentReservation_methods" value="+ getReservationId(): int&lt;br&gt;+ getOrder(): Order&lt;br&gt;+ getEquipment(): Equipment" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_EquipmentReservation">
+          <mxGeometry x="0" y="206" width="665" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_EquipmentReservation_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_EquipmentReservation">
+          <mxGeometry x="0" y="206" width="665" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ResourceRequest" value="«record»&lt;br&gt;ResourceRequest" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="3060" y="2080" width="520" height="198" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ResourceRequest_attributes" value="+ resourceType: String&lt;br&gt;+ resourceId: int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ResourceRequest">
+          <mxGeometry x="0" y="58" width="520" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ResourceRequest_methods" value="+ resourceType(): String&lt;br&gt;+ resourceId(): int" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_ResourceRequest">
+          <mxGeometry x="0" y="128" width="520" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_ResourceRequest_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_ResourceRequest">
+          <mxGeometry x="0" y="128" width="520" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CostItem" value="«record»&lt;br&gt;CostItem" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="3660" y="2080" width="590" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CostItem_attributes" value="+ resourceId: int&lt;br&gt;+ hours: BigDecimal&lt;br&gt;+ hourlyRate: BigDecimal" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_CostItem">
+          <mxGeometry x="0" y="58" width="590" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CostItem_methods" value="+ resourceId(): int&lt;br&gt;+ hours(): BigDecimal&lt;br&gt;+ hourlyRate(): BigDecimal" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_CostItem">
+          <mxGeometry x="0" y="154" width="590" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_CostItem_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_CostItem">
+          <mxGeometry x="0" y="154" width="590" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Estimate" value="«record»&lt;br&gt;Estimate" style="swimlane;html=1;startSize=58;horizontal=1;container=1;collapsible=0;rounded=0;fillColor=#EDF3F9;swimlaneFillColor=#FFFFFF;strokeColor=#263C52;fontColor=#182C40;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="3660" y="2500" width="590" height="198" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Estimate_attributes" value="+ estimatedPrice: BigDecimal&lt;br&gt;+ deadline: LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Estimate">
+          <mxGeometry x="0" y="58" width="590" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Estimate_methods" value="+ estimatedPrice(): BigDecimal&lt;br&gt;+ deadline(): LocalDateTime" style="text;html=1;whiteSpace=wrap;overflow=hidden;verticalAlign=top;align=left;spacingLeft=8;spacingTop=8;fontSize=17;fontColor=#1F394C;strokeColor=none;fillColor=none;" vertex="1" parent="class_Estimate">
+          <mxGeometry x="0" y="128" width="590" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="class_Estimate_divider" value="" style="line;strokeColor=#AABBCD;strokeWidth=1;" vertex="1" parent="class_Estimate">
+          <mxGeometry x="0" y="128" width="590" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=open;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="class_Main" target="class_StudioService">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel2" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;startArrow=diamond;startFill=0;startSize=17;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_StudioService" target="class_Order">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel3" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=open;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="class_StudioService" target="class_ProcessingRule">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel4" value="1 / 0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=none;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="class_Order" target="class_Client">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel5" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;startArrow=diamond;startFill=1;startSize=17;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Order" target="class_OrderStage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel6" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;startArrow=diamond;startFill=1;startSize=17;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Order" target="class_VideoMaterial">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel7" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;startArrow=diamond;startFill=1;startSize=17;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Order" target="class_EmployeeAssignment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel8" value="0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;startArrow=diamond;startFill=1;startSize=17;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Order" target="class_EquipmentReservation">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel9" value="1 / 0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=none;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="class_EmployeeAssignment" target="class_Employee">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel10" value="1 / 0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=none;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="class_EquipmentReservation" target="class_Equipment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=block;endFill=0;endSize=16;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="class_CameraOperator" target="class_Employee">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=block;endFill=0;endSize=16;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="class_VideoEditor" target="class_Employee">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=block;endFill=0;endSize=16;dashed=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="class_FourKProcessingRule" target="class_ProcessingRule">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=block;endFill=0;endSize=16;dashed=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="class_HighResolutionProcessingRule" target="class_ProcessingRule">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=open;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_StudioService" target="class_ResourceRequest">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=open;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_StudioService" target="class_CostItem">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#718096;strokeWidth=2;endArrow=open;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_StudioService" target="class_Estimate">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
