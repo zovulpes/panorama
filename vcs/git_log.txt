@@ -1,3 +1,7 @@
+d29b9d3 2026-11-24 22:33:41 +0300 Zoya Matyashova KT3: fix issues found during peer review
+2419b94 2026-11-24 21:32:22 +0300 Zoya Matyashova KT3: add Java OOP implementation
+3bfbb40 2026-11-24 21:28:43 +0300 Zoya Matyashova KT3: add UML class diagram
+8c4c137 2026-11-23 21:09:00 +0300 Zoya Matyashova Fix KT2: update diagrams, report and Java code
 c0d76f9 2026-11-03 20:51:36 +0300 Pastukhova added code, models and updated the report
 cdc9e63 2026-11-02 21:38:13 +0300 Pastukhova updated the report
 1681e8c 2026-11-01 14:17:50 +0300 Pastukhova added models
